@@ -12,11 +12,17 @@
         <td>lastname</td>
     </tr>
     <c:forEach items="${users}" var="user">
+        <c:url var="deleteLink"  value="${pageContext.request.contextPath}/delete">
+            <c:param name="id" value="${user.id}"/>
+        </c:url>
         <tr>
-        <td>${user.id}</td>
-        <td>${user.firstName}</td>
-        <td>${user.lastName}</td>
-    </tr>
+            <td>${user.id}</td>
+            <td>${user.firstName}</td>
+            <td>${user.lastName}</td>
+            <td>
+                <a href="${deleteLink}">Delete</a>
+            </td>
+        </tr>
     </c:forEach>
 </table>
 

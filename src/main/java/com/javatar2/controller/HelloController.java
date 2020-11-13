@@ -7,9 +7,7 @@ import com.javatar2.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,5 +43,17 @@ public class HelloController {
         return "redirect:/users";
     }
 
+   @RequestMapping("/user/{id}")
+    public String users(@PathVariable int id, Model model){
+        User user = userDaoImpl.getUserById(id);
+        model.addAttribute("user", user);
+        return "user";
+    }
 
+    @RequestMapping("/delete")
+    public String deletUser(@RequestParam("id") int id, Model model){
+        User user = userDaoImpl.getUserById(id);
+        userDaoImpl.deleteUser(user);
+        return "redirect:/users";
+    }
 }
